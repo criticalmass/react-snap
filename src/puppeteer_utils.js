@@ -173,8 +173,14 @@ const crawl = async opt => {
    * @returns {void}
    */
   const addToQueue = newUrl => {
-    const { hostname, search, hash } = url.parse(newUrl);
+    const { hostname, search, hash, path } = url.parse(newUrl);
     newUrl = newUrl.replace(`${search || ""}${hash || ""}`, "");
+    // /path/your/path/ => path/your/path => [path, your, path]
+    if (
+      path.replace(/^\/|\/$/g, "").split("/").length > options.maxNestedLevels
+    ) {
+      return;
+    }
     if (hostname === "localhost" && !uniqueUrls.has(newUrl) && !streamClosed) {
       uniqueUrls.add(newUrl);
       enqued++;

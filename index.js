@@ -20,6 +20,7 @@ const defaultOptions = {
   concurrency: 4,
   include: ["/"],
   userAgent: "ReactSnap",
+  maxNestedLevels: 1,
   // 4 params below will be refactored to one: `puppeteer: {}`
   // https://github.com/stereobooster/react-snap/issues/120
   headless: true,
@@ -780,7 +781,6 @@ const run = async (userOptions, { fs } = { fs: nativeFs }) => {
         );
         routePath = normalizePath(routePath);
         if (routePath !== newPath) {
-          console.log(newPath)
           console.log(`💬  in browser redirect (${newPath})`);
           addToQueue(newRoute);
         }
