@@ -195,7 +195,7 @@ const crawl = async opt => {
     headless: options.headless,
     args: options.puppeteerArgs,
     executablePath: options.puppeteerExecutablePath,
-    ignoreHTTPSErrors: options.puppeteerIgnoreHTTPSErrors,
+    ignoreHTTPSErrors: true,
     handleSIGINT: false
   });
 
