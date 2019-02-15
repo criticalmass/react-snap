@@ -89,7 +89,7 @@ const enableLogging = opt => {
       try {
         route = response._request
           .headers()
-          .referer.replace(`http://localhost:${options.port}`, "");
+          .referer.replace(`http://0.0.0.0:${options.port}`, "");
       } catch (e) {}
       console.log(
         `️️️⚠️  warning at ${route}: got ${response.status()} HTTP code for ${response.url()}`
@@ -181,7 +181,7 @@ const crawl = async opt => {
     ) {
       return;
     }
-    if (hostname === "localhost" && !uniqueUrls.has(newUrl) && !streamClosed) {
+    if (hostname === "0.0.0.0" && !uniqueUrls.has(newUrl) && !streamClosed) {
       uniqueUrls.add(newUrl);
       enqued++;
       queue.write(newUrl);

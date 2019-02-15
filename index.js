@@ -163,7 +163,7 @@ const preloadResources = opt => {
     if (/^data:|blob:/i.test(responseUrl)) return;
     const ct = response.headers()["content-type"] || "";
     const route = responseUrl.replace(basePath, "");
-    if (/^http:\/\/localhost/i.test(responseUrl)) {
+    if (/^http:\/\/0.0.0.0/i.test(responseUrl)) {
       if (uniqueResources.has(responseUrl)) return;
       if (preloadImages && /\.(png|jpg|jpeg|webp|gif|svg)$/.test(responseUrl)) {
         if (http2PushManifest) {
@@ -639,7 +639,7 @@ const run = async (userOptions, { fs } = { fs: nativeFs }) => {
 
   const server = options.externalServer ? null : startServer(options);
 
-  const basePath = `http://localhost:${options.port}`;
+  const basePath = `http://0.0.0.0:${options.port}`;
   const publicPath = options.publicPath;
   const ajaxCache = {};
   const { http2PushManifest } = options;
